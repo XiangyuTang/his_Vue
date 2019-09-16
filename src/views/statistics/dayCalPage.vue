@@ -345,30 +345,30 @@
         }
 
       },
-      DODaycal() {
-        //console.log(qs.stringify({usrID:this.userID,date:new Date(),drugCost:this.detailworkload.YF_Total,registrateCost:this.detailworkload.GH_Total,materialCost:this.detailworkload.CL_Total,examinateCost:this.detailworkload.JC_Total,treatCost:this.detailworkload.CZ_Total,qtCost:this.detailworkload.QT_Total ,totalCost:this.detailworkload.Day_Cal_Total,invoiceIDs: this.invoiceIDselected}, {indices: false}))
-        this.$post("dayCalculate/personalDayCalculate", {
-          userID: this.userID,
-          date: new Date(),
-          drugCost: this.detailworkload.YF_Total,
-          registrateCost: this.detailworkload.GH_Total,
-          materialCost: this.detailworkload.CL_Total,
-          examinateCost: this.detailworkload.JC_Total,
-          treatCost: this.detailworkload.CZ_Total,
-          qtCost: this.detailworkload.QT_Total,
-          totalCost: this.detailworkload.Day_Cal_Total,
-          invoiceIDs: this.invoiceIDselected
-        }).then(res=> {
-          // result是所有的返回回来的数据
-          // 包括了响应报文行
-          // 响应报文头
-          // 响应报文体
-          if (res.status === "OK") {
-            alert("成功");
-            this.reload();
-          }
-        });
-      },
+      // DODaycal() {
+      //   //console.log(qs.stringify({usrID:this.userID,date:new Date(),drugCost:this.detailworkload.YF_Total,registrateCost:this.detailworkload.GH_Total,materialCost:this.detailworkload.CL_Total,examinateCost:this.detailworkload.JC_Total,treatCost:this.detailworkload.CZ_Total,qtCost:this.detailworkload.QT_Total ,totalCost:this.detailworkload.Day_Cal_Total,invoiceIDs: this.invoiceIDselected}, {indices: false}))
+      //   this.$post("dayCalculate/personalDayCalculate", {
+      //     userID: this.userID,
+      //     date: new Date(),
+      //     drugCost: this.detailworkload.YF_Total,
+      //     registrateCost: this.detailworkload.GH_Total,
+      //     materialCost: this.detailworkload.CL_Total,
+      //     examinateCost: this.detailworkload.JC_Total,
+      //     treatCost: this.detailworkload.CZ_Total,
+      //     qtCost: this.detailworkload.QT_Total,
+      //     totalCost: this.detailworkload.Day_Cal_Total,
+      //     invoiceIDs: this.invoiceIDselected
+      //   }).then(res=> {
+      //     // result是所有的返回回来的数据
+      //     // 包括了响应报文行
+      //     // 响应报文头
+      //     // 响应报文体
+      //     if (res.status === "OK") {
+      //       alert("成功");
+      //       this.reload();
+      //     }
+      //   });
+      // },
       async changeTab(index) {
         this.currentTab = index;
         this.getHistoryORDayCal()
@@ -378,19 +378,25 @@
         this.daycalitems.push(this.detailworkload)
       },
       findNotCalInvoices() {
-        console.log(this.selected[0]['userId'])
-        this.$post("dayCalculate/findInvoices", {userID: this.selected[0]['userId']}).then(res=> {
-          // result是所有的返回回来的数据
-          // 包括了响应报文行
-          // 响应报文头
-          // 响应报文体
-          this.invoiceitems = [];
-          console.log(res.data)
-          this.invoiceitems = res.data;
-          for (let item of this.invoiceitems) {
-            this.$set(item, "isselected", false)
-          }
-        });
+        console.log(this.selected[0]['userId']);
+        this.invoiceitems = [];
+        //console.log(res.data)
+        this.invoiceitems = [{invoiceNo:1, payTime: '2019-10-10', totalCost: 20},{invoiceNo:2, payTime: '2019-10-10', totalCost: 20},{invoiceNo:3, payTime: '2019-10-10', totalCost: 20},{invoiceNo:4, payTime: '2019-10-10', totalCost: 20}];
+        for (let item of this.invoiceitems) {
+          this.$set(item, "isselected", false)
+        }
+        // this.$post("dayCalculate/findInvoices", {userID: this.selected[0]['userId']}).then(res=> {
+        //   // result是所有的返回回来的数据
+        //   // 包括了响应报文行
+        //   // 响应报文头
+        //   // 响应报文体
+        //   this.invoiceitems = [];
+        //   console.log(res.data)
+        //   this.invoiceitems = res.data;
+        //   for (let item of this.invoiceitems) {
+        //     this.$set(item, "isselected", false)
+        //   }
+        // });
       },
       fillCalData() {
         let result = [];
@@ -402,7 +408,7 @@
           }
           console.log(result);
           this.invoiceIDselected = result;
-          this.CalculateWorkload();
+         // this.CalculateWorkload();
         }
       },
       CalculateWorkload() {
@@ -562,22 +568,24 @@
         }
       },
       getHistory() {
-        this.$post("dayCalculate/findHistoryCalUsers").then(res=> {
-          // result是所有的返回回来的数据
-          // 包括了响应报文行
-          // 响应报文头
-          // 响应报文体
-          this.historyitems = res.data;
-        });
+        this.historyitems=[{userId:3,userName:'王五'},{userId:4,userName:'赵六'}]
+        // this.$post("dayCalculate/findHistoryCalUsers").then(res=> {
+        //   // result是所有的返回回来的数据
+        //   // 包括了响应报文行
+        //   // 响应报文头
+        //   // 响应报文体
+        //   this.historyitems = res.data;
+        // });
       },
       findNotCalUsers() {
-        this.$post("dayCalculate/findNotCalUsers").then(res=> {
-          // result是所有的返回回来的数据
-          // 包括了响应报文行
-          // 响应报文头
-          // 响应报文体
-          this.items = res.data;
-        });
+        this.items=[{userId:1,userName:'张三'},{userId:2,userName:'李四'}]
+        // this.$post("dayCalculate/findNotCalUsers").then(res=> {
+        //   // result是所有的返回回来的数据
+        //   // 包括了响应报文行
+        //   // 响应报文头
+        //   // 响应报文体
+        //   this.items = res.data;
+        // });
       },
       CaltotalRows() {
         this.totalRows = this.items.length;

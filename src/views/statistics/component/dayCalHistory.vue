@@ -246,22 +246,26 @@
         if(this.userID===null){
           console.log();
         }else {
-          this.$post("dayCalculate/userDayCalculateHistory", {
-            'sdate': this.sdate,
-            'edate': this.edate,
-            'userID': this.userID
-          }).then(res=> {
-            // result是所有的返回回来的数据
-            // 包括了响应报文行
-            // 响应报文头
-            // 响应报文体
-            this.items = [];
-            this.items = res.data;
-            for (let item of this.items) {
-              this.$set(item, "isselected", false)
-            }
-            //console.log(result);
-          });
+          this.items = [{ ghTotal:20,yfTotal:20,clTotal:20,jcTotal:20,czTotal:20,qtTotal:20,dayCalTotal:120}];
+          for (let item of this.items) {
+            this.$set(item, "isselected", false)
+          }
+          // this.$post("dayCalculate/userDayCalculateHistory", {
+          //   'sdate': this.sdate,
+          //   'edate': this.edate,
+          //   'userID': this.userID
+          // }).then(res=> {
+          //   // result是所有的返回回来的数据
+          //   // 包括了响应报文行
+          //   // 响应报文头
+          //   // 响应报文体
+          //   this.items = [];
+          //   this.items = res.data;
+          //   for (let item of this.items) {
+          //     this.$set(item, "isselected", false)
+          //   }
+          //   //console.log(result);
+          // });
           this.CaltotalRows();
         }
       },

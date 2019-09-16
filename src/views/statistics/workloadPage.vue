@@ -132,18 +132,20 @@
         this.currentpersonalitems=newList;
       },
       findAll(){
-        var url  = "department/findAll";
-                    // 发送请求:将数据返回到一个回到函数中
-                    // 并且响应成功以后会执行then方法中的回调函数
-                    this.$get(url).then(res=> {
-                          // result是所有的返回回来的数据
-                          // 包括了响应报文行
-                          // 响应报文头
-                          // 响应报文体
-                      this.departmentitems=res.data
-                      this.currentdepartmentitems=res.data
-                      //console.log(res.data);
-                    });
+        this.departmentitems=[{departmentId:1,departmentName:'脑科'},{departmentId:2,departmentName:'眼科'},{departmentId:3,departmentName:'耳科'}];
+        this.currentdepartmentitems=this.departmentitems;
+        // var url  = "department/findAll";
+        //             // 发送请求:将数据返回到一个回到函数中
+        //             // 并且响应成功以后会执行then方法中的回调函数
+        //             this.$get(url).then(res=> {
+        //                   // result是所有的返回回来的数据
+        //                   // 包括了响应报文行
+        //                   // 响应报文头
+        //                   // 响应报文体
+        //               this.departmentitems=res.data
+        //               this.currentdepartmentitems=res.data
+        //               //console.log(res.data);
+        //             });
       },
       findModel(){
        // console.log(this.currentDepartment)
@@ -172,17 +174,19 @@
             departmentID: items[0]['departmentId']
           };
           console.log(data);
-          this.$get("department/findUser",data).then(res=> {
-            // result是所有的返回回来的数据
-            // 包括了响应报文行
-            // 响应报文头
-            // 响应报文体
-            console.log("here");
-            this.personalitems=res.data;
-            this.currentpersonalitems=res.data;
-            console.log(res.data);
-            console.log("res.data:"+this.personalitems);
-          });
+          this.personalitems=[{userId:1,userName:'夏小凡'},{userId:2,userName:'李小凡'},{userId:3,userName:'王小凡'}];
+          this.currentpersonalitems=this.personalitems;
+          // this.$get("department/findUser",data).then(res=> {
+          //   // result是所有的返回回来的数据
+          //   // 包括了响应报文行
+          //   // 响应报文头
+          //   // 响应报文体
+          //   console.log("here");
+          //   this.personalitems=res.data;
+          //   this.currentpersonalitems=res.data;
+          //   console.log(res.data);
+          //   console.log("res.data:"+this.personalitems);
+          // });
           console.log(this.departmentitems)
         this.isShow = true;
        // console.log(this.currentDepartment)
